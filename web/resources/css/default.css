@@ -1,0 +1,115 @@
+/* 
+    Document   : default
+    Created on : 08.06.2011, 10:55:21
+    Author     : SunDevil
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, blockquote, p, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, input, textarea, select, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+    background:transparent;
+    border:0px;
+    font-style:normal;
+    font-size:100%;
+    margin:0px;
+    outline:0px;
+    padding:0px;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body {background-color:#ededed;}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: Verdana, Arial, sans-serif;
+    font-weight: normal;
+    letter-spacing:-1px;
+    color:#638f97;
+}
+h1 {
+    font-family:'Lucida Grande', 'Lucida Sans Unicode', Tahoma, Arial, san-serif;
+    font-size:40px;
+    line-height:40px;
+    letter-spacing:-2.6px;
+}
+h1 span {
+    font-style:italic;
+    font-size:24px;
+    letter-spacing:-2px;
+}
+h2 {
+    font-family:'Lucida Grande', 'Lucida Sans Unicode', Tahoma, Arial, san-serif;
+    font-size:28px;
+    line-height:36px;
+    border-bottom:2px solid #638f97; width:60%;
+    margin-bottom:10px;
+}
+h3 {
+    font-family:"Myriad Pro", Verdana, Arial, sans-serif;
+    font-size:18px;
+    line-height:18px;
+    letter-spacing:0.5px;
+    text-transform:uppercase;
+    color:#504d4d;
+    margin:2px 3px 10px 5px;
+    display:block;
+}
+h4 {
+    font-family:'Lucida Grande', 'Lucida Sans Unicode', Tahoma, Arial, san-serif;
+    font-size:16px;
+    line-height:24px;
+    border-bottom:2px solid #638f97; width:40%;
+}
+h5 {
+    font-size:14px;
+    font-weight:bold;
+    line-height:21px;
+}
+h6 {
+    font-size:12px;
+    font-weight:bold;
+    line-height:18px;
+}
+
+p  {
+    font-family:'Lucida Grande', 'Lucida Sans Unicode', Tahoma, Arial, san-serif;
+    font-size:100%;
+    line-height:15px;
+    /*    padding:0 0 20px 0;*/
+}
+
+/* link style*/
+a:link {
+    color:#638f97;
+}
+
+a:visited {
+    color: #58abba;
+}
+
+a:hover {
+    color:#638f97;
+    text-decoration:underline;
+}
+/*-----------*/
+
+
+
+
+
+
+

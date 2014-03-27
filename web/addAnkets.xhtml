@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j">
+    <head><title>IGNORED</title></head>
+    <body>       
+        <ui:composition template="mainLayout.xhtml">
+
+            <ui:define name="content">                  
+
+                <h:panelGroup id="questl">
+                    <div id="quest_list">
+                        <a4j:repeat value="#{addAnkets.quests}" var="qs"  >
+
+                            <div class="quest">
+                                <!--выводим номер и текст вопроса-->
+                                <h:panelGrid columns="2">
+                                    <h:outputText value="#{qs.questNum}." styleClass="quest_num"/>
+                                    <h:outputText value="#{qs.value}" styleClass="quest_text"/>
+                                </h:panelGrid>
+                                <div class="answer_list">
+
+
+                                    <!--если вопрос с одним вариантом ответа - просто радиобуттоны-->                               
+                                    <h:selectOneRadio value="#{addAnkets.getQuestResult(qs).answNum}" 
+                                                      rendered="#{(qs.discr eq 'A') and (empty qs.subqList)}" layout="#{qs.layout}">
+                                        <f:selectItems value="#{qs.answerList}" var="ans" itemLabel="#{ans.name}" itemValue="#{ans.answNum}"/>    
+                                    </h:selectOneRadio>
+
+                                    <!--если вопрос с вариантом ответа, предусматривающим ввод-->
+                                    <a4j:repeat value="#{qs.answerList}" var="ans" rendered="#{(qs.discr eq 'B') and (empty qs.subqList)}">
+                                        <h:selectOneRadio value="#{addAnkets.getQuestResult(qs).answNum}" 
+                                                          rendered="#{ans.discr eq 'A'}" layout="#{qs.layout}">
+                                            <f:selectItem itemLabel="#{ans.name}" itemValue="#{ans.answNum}"/>
+                                        </h:selectOneRadio>
+                                        <h:panelGrid rendered="#{ans.discr eq 'B'}" columns="2">
+                                            <h:outputText value="#{ans.name}"/>
+                                            <h:inputText value="#{addAnkets.getQuestResult(qs).value}"/>
+                                        </h:panelGrid>
+                                    </a4j:repeat>
+
+                                    <!--если есть подвопросы-->
+                                    <h:panelGroup rendered="#{not empty qs.subqList}">
+                                        <a4j:repeat value="#{qs.subqList}" var="sq">  
+                                            <!--текст подвопроса-->
+                                            <h:outputText value="#{sq.name}" styleClass="subq_header"/>   
+
+                                            <!--если подвопрос с вариантами ответа-->
+                                            <h:selectOneRadio rendered="#{qs.discr eq 'A'}" 
+                                                              value="#{addAnkets.getQuestResult(qs,sq).answNum}"
+                                                              styleClass="subq_answ" layout="#{qs.layout}">
+                                                <f:selectItems value="#{addAnkets.getAnswerListWithSubQuest(qs.id,sq.id)}" var="answ" 
+                                                               itemLabel="#{answ.name}" itemValue="#{answ.answNum}"/>
+                                            </h:selectOneRadio> 
+
+                                            <!--если подвопрос с заданием значения-->
+                                            <h:panelGrid rendered="#{qs.discr eq 'B'}" columns="2">
+                                                <a4j:repeat value="#{addAnkets.getAnswerListWithSubQuest(qs.id,sq.id)}" var="a">
+                                                    <h:outputText value="#{a.name}"/>
+                                                    <h:inputText value="#{addAnkets.getQuestResult(qs,sq).value}"/>
+                                                </a4j:repeat>
+                                            </h:panelGrid>
+
+                                        </a4j:repeat>
+                                    </h:panelGroup>
+
+                                    <h:inputTextarea value="#{addAnkets.getQuestResult(qs).value}" 
+                                                     rendered="#{qs.discr eq 'C'}" styleClass="textarea"/>
+
+                                </div>
+                            </div>   
+
+                        </a4j:repeat>
+                    </div>   
+                </h:panelGroup>
+
+
+                <div id="addAnkets_button">
+                    <h:panelGrid columns="3">
+                        <a4j:commandLink value="#{msg.ad_save}" styleClass="blue_button" action="index" 
+                                         actionListener="#{addAnkets.saveAnketsResult()}"/>
+                        <a4j:commandLink value="#{msg.ad_save_and_add}" styleClass="blue_button" 
+                                         actionListener="#{addAnkets.clearAndSaveAnketsResult()}" render="questl"/>
+                        <a4j:commandLink value="#{msg.ad_cancel}" action="index" styleClass="blue_button"/>                       
+                    </h:panelGrid>
+                </div>
+
+
+            </ui:define>
+
+        </ui:composition>
+    </body>
+</html>

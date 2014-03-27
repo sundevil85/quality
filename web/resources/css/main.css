@@ -1,0 +1,47 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 19.03.2014, 13:04:47
+    Author     : Zhuk
+*/
+
+#topbar {position: relative; top:0px; width: 100%; margin: auto; text-align: center; 
+         background-color: #404041; padding: 5px 0px 5px 0px; color: #CCC;}
+
+#page {position: relative; top: 5px; width: 1040px; margin: auto;}
+
+#heading {position: relative; width: 100%; margin-bottom: 20px;}
+
+#content { position: relative; 
+           padding: 10px; background-color: white; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.5);}    
+
+#eventsSel p {margin-bottom: 5px;}
+
+#anlets_list_div {margin-top: 40px;}
+
+.lower_text {font-size: 70%;}
+
+
+
+/*блок вопросов*/
+.quest_num {font-size: 130%; font-weight: bold; margin-right: 10px;}
+#quest_list .quest:nth-child(even) {background-color: #EAEAEA;}
+#quest_list .quest:nth-child(odd) {background-color: #d2cfcf;}
+.quest {margin: 10px 5px; border-radius: 10px; padding: 5px;}
+.quest_text {font-size: 110%;}
+.subq_header {display: block; margin-right: 40px; font-weight: bold; font-style: italic; text-decoration: underline; }
+.subq_answ {margin-left: 20px; margin-top: 5px;}
+/*блок вопросов*/
+
+/*блок ответов*/
+.answer_list {margin-left: 35px; margin-top: 5px;}
+.answer_list label {margin-right: 10px;}
+input[type="text"] {font-size: 120%; margin-left: 5px;}
+.textarea {background-color: white; width: 95%; margin-bottom: 5px;}
+/*блок ответов*/
+
+#addAnkets_button .blue_button {margin: 0px 8px;}
+#addAnkets_button {margin: 30px 10px; float: right; clear: both; }

@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <head><title>IGNORED</title></head>
+    <body>       
+        <ui:composition template="mainLayout.xhtml">
+
+            <ui:define name="content">   
+
+                <div id="eventsSel">
+                    <ui:insert name="eventsSel">
+                        <ui:include src="eventsSel.xhtml"/>
+                    </ui:insert>
+                </div>
+
+                <h:panelGroup id="ankets_list">
+                    <div id="anlets_list_div">
+
+                        <h:panelGroup rendered="#{evnt.currentEventsID gt 0}">                          
+                                                   
+                                                   
+                            <br/>                       
+                            <h:link value="#{msg.ev_addAnkets}" outcome="addAnkets" id="addAnketsButton" styleClass="blue_button"/>
+                            
+                        </h:panelGroup>
+
+
+                    </div>
+                </h:panelGroup>
+
+            </ui:define>
+
+        </ui:composition>
+    </body>
+</html>
+
