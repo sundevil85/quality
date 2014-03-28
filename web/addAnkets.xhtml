@@ -35,16 +35,26 @@
                                     <rich:message for="sor" ajaxRendered="true"/>
 
                                     <!--если вопрос с вариантом ответа, предусматривающим ввод-->
-                                    <a4j:repeat value="#{qs.answerList}" var="ans" rendered="#{(qs.discr eq 'B') and (empty qs.subqList)}">
-                                        <h:selectOneRadio value="#{addAnkets.getQuestResult(qs).answNum}" 
-                                                          rendered="#{ans.discr eq 'A'}" layout="#{qs.layout}">
-                                            <f:selectItem itemLabel="#{ans.name}" itemValue="#{ans.answNum}"/>
-                                        </h:selectOneRadio>
-                                        <h:panelGrid rendered="#{ans.discr eq 'B'}" columns="2">
-                                            <h:outputText value="#{ans.name}"/>
-                                            <h:inputText value="#{addAnkets.getQuestResult(qs).value}"/>
-                                        </h:panelGrid>
-                                    </a4j:repeat>
+                                    <div class="inputtextclass_#{qs.questNum}">
+                                        <a4j:repeat value="#{qs.answerList}" var="ans" rendered="#{(qs.discr eq 'B') and (empty qs.subqList)}">
+                                            <h:selectOneRadio value="#{addAnkets.getQuestResult(qs).answNum}" 
+                                                              rendered="#{ans.discr eq 'A'}" layout="#{qs.layout}">
+                                                <f:selectItem itemLabel="#{ans.name}" itemValue="#{ans.answNum}"/>
+                                            </h:selectOneRadio>
+                                            <h:panelGrid rendered="#{ans.discr eq 'B'}" columns="2">
+                                                <h:outputText value="#{ans.name}"/>
+                                                <h:inputText value="#{addAnkets.getQuestResult(qs).value}"/>
+                                            </h:panelGrid>
+                                        </a4j:repeat>
+
+                                        <!--навешивание обработчиков на текстоыве поля и радиобуттоны 
+                                        для того чтобы не возможно было одновременного заполнения
+                                        поля и отметки чекбокса-->                                       
+                                        <script type="text/javascript">
+                                            init_comp(#{qs.questNum});
+                                        </script>                                       
+                                    </div>
+
 
                                     <!--если есть подвопросы-->
                                     <h:panelGroup rendered="#{not empty qs.subqList}">
@@ -55,10 +65,12 @@
                                             <!--если подвопрос с вариантами ответа-->
                                             <h:selectOneRadio rendered="#{qs.discr eq 'A'}" 
                                                               value="#{addAnkets.getQuestResult(qs,sq).answNum}"
-                                                              styleClass="subq_answ" layout="#{qs.layout}">
+                                                              styleClass="subq_answ" layout="#{qs.layout}" 
+                                                              required="true" requiredMessage="#{msg.err_novalue}" id="sor">
                                                 <f:selectItems value="#{addAnkets.getAnswerListWithSubQuest(qs.id,sq.id)}" var="answ" 
                                                                itemLabel="#{answ.name}" itemValue="#{answ.answNum}"/>
                                             </h:selectOneRadio> 
+                                            <rich:message for="sor" ajaxRendered="true"/>
 
                                             <!--если подвопрос с заданием значения-->
                                             <h:panelGrid rendered="#{qs.discr eq 'B'}" columns="2">
@@ -85,12 +97,14 @@
                 <div id="addAnkets_button">
                     <h:panelGrid columns="3">
                         <a4j:commandLink value="#{msg.ad_save}" styleClass="blue_button" action="index" 
-                                         actionListener="#{addAnkets.saveAnketsResult()}"/>
+                                         actionListener="#{addAnkets.saveAnketsResult()}" onclick="return isSetValue();"/>
                         <a4j:commandLink value="#{msg.ad_save_and_add}" styleClass="blue_button" 
-                                         actionListener="#{addAnkets.clearAndSaveAnketsResult()}" render="questl"/>
-                        <a4j:commandLink value="#{msg.ad_cancel}" action="index" styleClass="blue_button"/>                       
+                                         actionListener="#{addAnkets.clearAndSaveAnketsResult()}" render="questl" onclick="return isSetValue();"/>
+                        <a4j:commandLink value="#{msg.ad_cancel}" action="index" styleClass="blue_button"/>                        
                     </h:panelGrid>
                 </div>
+
+
 
 
             </ui:define>
