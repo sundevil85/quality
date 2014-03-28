@@ -28,9 +28,11 @@
 
                                     <!--если вопрос с одним вариантом ответа - просто радиобуттоны-->                               
                                     <h:selectOneRadio value="#{addAnkets.getQuestResult(qs).answNum}" 
-                                                      rendered="#{(qs.discr eq 'A') and (empty qs.subqList)}" layout="#{qs.layout}">
+                                                      rendered="#{(qs.discr eq 'A') and (empty qs.subqList)}" layout="#{qs.layout}" 
+                                                      required="true" requiredMessage="#{msg.err_novalue}" id="sor">
                                         <f:selectItems value="#{qs.answerList}" var="ans" itemLabel="#{ans.name}" itemValue="#{ans.answNum}"/>    
                                     </h:selectOneRadio>
+                                    <rich:message for="sor" ajaxRendered="true"/>
 
                                     <!--если вопрос с вариантом ответа, предусматривающим ввод-->
                                     <a4j:repeat value="#{qs.answerList}" var="ans" rendered="#{(qs.discr eq 'B') and (empty qs.subqList)}">
