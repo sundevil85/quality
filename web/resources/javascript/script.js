@@ -5,6 +5,7 @@
  */
 
 
+
 function init_comp(classId) {
     //навешиваем обраобтчик нажатия кнопки в текстовом поле, по которому 
     //все радиобаттоны отменяются
@@ -38,14 +39,45 @@ function isSetValue() {
     }
     var checkCount = $('div.inputtextclass input[type=radio]:checked').size();
     if (checkCount === 0) {
+        addNotice('Введены не все данные!');
         return false;
     }
     return true;
 }
 
 
-function test() {
-   
+function addNotice(notice) {
+    
+    $('#growl').css('top',parseInt($('#topbar').height()+15)+'px');
+    
+    $('<div class="notice"></div>')
+            .append('<div class="skin"></div>')            
+            .append($('<div class="content"></div>').html(notice))
+            .hide()
+            .appendTo('#growl')
+            .fadeIn(1000);
+
+    setTimeout('closeNotify()', 3000);
 }
+
+function closeNotify() {
+    $('#growl')
+            .find('.notice')
+            .animate({
+                border: 'none',
+                height: 0,
+                marginBottom: 0,
+                marginTop: '-6px',
+                opacity: 0,
+                paddingBottom: 0,
+                paddingTop: 0,
+                queue: false
+            }, 1000, function() {
+                $(this).remove();
+            });
+}
+
+
+
 
 
