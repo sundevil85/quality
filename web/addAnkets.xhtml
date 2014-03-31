@@ -51,7 +51,7 @@
                                         для того чтобы не возможно было одновременного заполнения
                                         поля и отметки чекбокса-->                                       
                                         <script type="text/javascript">
-                                            init_comp(#{qs.questNum});
+                                            init_comp(#{qs.questNum}); 
                                         </script>                                       
                                     </div>
 
@@ -76,7 +76,8 @@
                                             <h:panelGrid rendered="#{qs.discr eq 'B'}" columns="2">
                                                 <a4j:repeat value="#{addAnkets.getAnswerListWithSubQuest(qs.id,sq.id)}" var="a">
                                                     <h:outputText value="#{a.name}"/>
-                                                    <h:inputText value="#{addAnkets.getQuestResult(qs,sq).value}"/>
+                                                    <h:inputText value="#{addAnkets.getQuestResult(qs,sq).value}" required="true" 
+                                                                 requiredMessage="#{msg.err_novalue}"/>
                                                 </a4j:repeat>
                                             </h:panelGrid>
 
@@ -100,11 +101,9 @@
                                          actionListener="#{addAnkets.saveAnketsResult()}" onclick="return isSetValue();"/>
                         <a4j:commandLink value="#{msg.ad_save_and_add}" styleClass="blue_button" 
                                          actionListener="#{addAnkets.clearAndSaveAnketsResult()}" render="questl" onclick="return isSetValue();"/>
-                        <a4j:commandLink value="#{msg.ad_cancel}" action="index" styleClass="blue_button"/>                        
+                        <a4j:commandLink value="#{msg.ad_cancel}" styleClass="blue_button" action="index"/>                                               
                     </h:panelGrid>
                 </div>
-
-
 
 
             </ui:define>

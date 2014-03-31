@@ -24,10 +24,8 @@ function init_comp(classId) {
                 if (chkCount > 1) {
                     $('div.inputtextclass_' + classId + ' input[type=radio]').removeAttr('checked');
                 }
-            })
-
+            });
 }
-
 
 
 
@@ -43,6 +41,11 @@ function isSetValue() {
         return false;
     }
     return true;
+}
+
+
+function test() {
+   
 }
 
 

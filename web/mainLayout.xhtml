@@ -13,18 +13,20 @@
         <h:outputStylesheet library="css" name="default.css"/> 
         <h:outputStylesheet library="css" name="main.css"/>  
         <h:outputStylesheet library="css" name="input.css"/>  
-        <h:outputStylesheet library="css/chosen" name="chosen.css"/> 
+        <h:outputStylesheet library="css/chosen" name="chosen.css"/>   
+      
 
         <h:outputScript library="javascript" name="jquery-2.1.0.min.js"/>
-        <h:outputScript library="javascript/chosen" name="chosen.jquery.min.js"/>    
-        <h:outputScript library="javascript" name="script.js"/>    
+        <h:outputScript library="javascript/chosen" name="chosen.jquery.min.js"/> 
+      
+        <h:outputScript library="javascript" name="script.js"/>               
         <ui:insert name="add_js"/>
     </h:head>
 
 
     <h:body>
-        
-         <h:messages/>
+
+        <h:messages/>
 
         <div id="topbar">
             <p>#{msg.main_topbar_title}</p>
@@ -64,11 +66,7 @@
                             </ui:insert>
                         </div>-->
 
-        </div>
-
-        <script type="text/javascript">
-            $(".chzn-select").chosen({disable_search: true});            
-        </script>   
+        </div>       
 
     </h:body>
 
