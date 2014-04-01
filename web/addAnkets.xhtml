@@ -32,28 +32,32 @@
                                                       required="true" requiredMessage="#{msg.err_novalue}" id="sor">
                                         <f:selectItems value="#{qs.answerList}" var="ans" itemLabel="#{ans.name}" itemValue="#{ans.answNum}"/>    
                                     </h:selectOneRadio>
-                                    <rich:message for="sor" ajaxRendered="true"/>
+                                    <rich:message styleClass="error_class" for="sor" ajaxRendered="true"/>
 
                                     <!--если вопрос с вариантом ответа, предусматривающим ввод-->
-                                    <div class="inputtextclass_#{qs.questNum}">
-                                        <a4j:repeat value="#{qs.answerList}" var="ans" rendered="#{(qs.discr eq 'B') and (empty qs.subqList)}">
-                                            <h:selectOneRadio value="#{addAnkets.getQuestResult(qs).answNum}" 
-                                                              rendered="#{ans.discr eq 'A'}" layout="#{qs.layout}">
-                                                <f:selectItem itemLabel="#{ans.name}" itemValue="#{ans.answNum}"/>
-                                            </h:selectOneRadio>
-                                            <h:panelGrid rendered="#{ans.discr eq 'B'}" columns="2">
-                                                <h:outputText value="#{ans.name}"/>
-                                                <h:inputText value="#{addAnkets.getQuestResult(qs).value}"/>
-                                            </h:panelGrid>
-                                        </a4j:repeat>
+                                    <h:panelGroup rendered="#{(qs.discr eq 'B') and (empty qs.subqList)}">
+                                        <div class="inputtextclass_#{qs.questNum}">
+                                            <a4j:repeat value="#{qs.answerList}" var="ans"> 
+                                                <h:selectOneRadio value="#{addAnkets.getQuestResult(qs).answNum}" 
+                                                                  rendered="#{ans.discr eq 'A'}" layout="#{qs.layout}">
+                                                    <f:selectItem itemLabel="#{ans.name}" itemValue="#{ans.answNum}"/>
+                                                </h:selectOneRadio>
+                                                <h:panelGrid rendered="#{ans.discr eq 'B'}" columns="2">
+                                                    <h:outputText value="#{ans.name}"/>
+                                                    <h:inputText value="#{addAnkets.getQuestResult(qs).value}"/>                                                
+                                                </h:panelGrid>
+                                            </a4j:repeat>
 
-                                        <!--навешивание обработчиков на текстоыве поля и радиобуттоны 
-                                        для того чтобы не возможно было одновременного заполнения
-                                        поля и отметки чекбокса-->                                       
-                                        <script type="text/javascript">
-                                            init_comp(#{qs.questNum});
-                                        </script>                                       
-                                    </div>
+                                            <!--навешивание обработчиков на текстоыве поля и радиобуттоны 
+                                            для того чтобы не возможно было одновременного заполнения
+                                            поля и отметки чекбокса-->                                       
+                                            <script type="text/javascript">
+                                                init_comp(#{qs.questNum});
+                                                addQuest(#{qs.questNum});
+                                            </script>   
+                                        </div>
+                                    </h:panelGroup>
+
 
 
                                     <!--если есть подвопросы-->
@@ -70,7 +74,7 @@
                                                 <f:selectItems value="#{addAnkets.getAnswerListWithSubQuest(qs.id,sq.id)}" var="answ" 
                                                                itemLabel="#{answ.name}" itemValue="#{answ.answNum}"/>
                                             </h:selectOneRadio> 
-                                            <rich:message for="sor" ajaxRendered="true"/>
+                                            <rich:message styleClass="error_class" for="sor" ajaxRendered="true"/>
 
                                             <!--если подвопрос с заданием значения-->
                                             <h:panelGrid rendered="#{qs.discr eq 'B'}" columns="2">
@@ -86,7 +90,6 @@
 
                                     <h:inputTextarea value="#{addAnkets.getQuestResult(qs).value}" 
                                                      rendered="#{qs.discr eq 'C'}" styleClass="textarea"/>
-
                                 </div>
                             </div>   
 
@@ -100,7 +103,8 @@
                         <a4j:commandLink value="#{msg.ad_save}" styleClass="blue_button" action="index" 
                                          actionListener="#{addAnkets.saveAnketsResult()}" onclick="return isSetValue();"/>
                         <a4j:commandLink value="#{msg.ad_save_and_add}" styleClass="blue_button" 
-                                         actionListener="#{addAnkets.clearAndSaveAnketsResult()}" render="questl" onclick="return isSetValue();"/>
+                                         actionListener="#{addAnkets.clearAndSaveAnketsResult()}" render="questl" 
+                                         onclick="return isSetValue();" oncomplete="addNotice('#{msg.save_sucess}',2000);"/>                                          
                         <a4j:commandLink value="#{msg.ad_cancel}" styleClass="blue_button" action="index"/>  
                     </h:panelGrid>
                 </div>

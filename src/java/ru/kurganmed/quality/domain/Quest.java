@@ -70,6 +70,10 @@ public class Quest implements Serializable {
 
     @Transient
     private List<Subq> subqList;//тоже самое
+    
+    public void settingQuestNum(Short qNum) {
+        this.questNum=qNum;
+    }
 
     public Quest() {
     }

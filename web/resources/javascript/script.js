@@ -4,6 +4,10 @@
  * and open the template in the editor.
  */
 
+//глобальный массив номеров вопросов для проверки средствами JS
+var global_quests = new Array();
+var global_quests_length = 0;
+
 
 
 function init_comp(classId) {
@@ -29,35 +33,75 @@ function init_comp(classId) {
 }
 
 
+//помещает в глобальный массив номера вопросов для проверки заполненности через JS
+function addQuest(qNum) {
+    global_quests[global_quests_length++] = qNum;
+}
 
 //если есть не заполненные блоки отменяем отправку форм
 function isSetValue() {
-    var result = false;
-    var value = $('div.inputtextclass input[type=text]').attr('value');
-    if ($.trim(value) !== '') {
+
+//    alert(global_quests_length);
+//    if (global_quests.length === 0) {
+//        return true;
+//    }
+
+
+    var setQ = 0; //количество заполненных ответов
+    //
+    //сначала пробегаем по текстовым полям
+    for (var i = 0; i < global_quests.length; i++) {
+        var value = $('div.inputtextclass_' + global_quests[i] + ' input[type=text]').attr('value');
+        if ($.trim(value) !== '') {
+            setQ++;
+        }
+    }
+
+    if (setQ === global_quests.length) { //если количество заполненных совпадает с общим кол-вом        
         return true;
     }
-    var checkCount = $('div.inputtextclass input[type=radio]:checked').size();
-    if (checkCount === 0) {
-        addNotice('Введены не все данные!');
-        return false;
+
+    //прибавляем кол-во отмеченных радиобуттонов
+    for (var i = 0; i < global_quests.length; i++) {
+        var checkCount = $('div.inputtextclass_' + global_quests[i] + ' input[type=radio]:checked').size();
+        setQ += checkCount;
     }
-    return true;
+
+    if (setQ === global_quests.length) { //если количество заполненных совпадает с общим кол-вом       
+        return true;
+    }
+
+    addNotice('Введены не все данные!', 3000);
+    return false;
 }
 
 
-function addNotice(notice) {
-    
-    $('#growl').css('top',parseInt($('#topbar').height()+15)+'px');
-    
+//function showSuccesSaveMessage(notice, timeout) {
+//    var width = $('.error_class').css('width');
+//    if (parseInt(width) === 0) {
+//        addNotice(notice, timeout);
+//    }
+//}
+
+
+function addNotice(notice, timeout) {
+
+    //показываем сообщения только если нет сообщений от <rich:message>
+    var width = $('.error_class').css('width');
+    if (parseInt(width) > 0) {
+        return;
+    }
+
+    $('#growl').css('top', parseInt($('#topbar').height() + 15) + 'px');
+
     $('<div class="notice"></div>')
-            .append('<div class="skin"></div>')            
+            .append('<div class="skin"></div>')
             .append($('<div class="content"></div>').html(notice))
             .hide()
             .appendTo('#growl')
             .fadeIn(1000);
 
-    setTimeout('closeNotify()', 3000);
+    setTimeout('closeNotify()', timeout);
 }
 
 function closeNotify() {
