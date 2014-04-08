@@ -41,12 +41,6 @@ function addQuest(qNum) {
 //если есть не заполненные блоки отменяем отправку форм
 function isSetValue() {
 
-//    alert(global_quests_length);
-//    if (global_quests.length === 0) {
-//        return true;
-//    }
-
-
     var setQ = 0; //количество заполненных ответов
     //
     //сначала пробегаем по текстовым полям
@@ -76,21 +70,24 @@ function isSetValue() {
 }
 
 
-//function showSuccesSaveMessage(notice, timeout) {
-//    var width = $('.error_class').css('width');
-//    if (parseInt(width) === 0) {
-//        addNotice(notice, timeout);
-//    }
-//}
-
-
 function addNotice(notice, timeout) {
 
-    //показываем сообщения только если нет сообщений от <rich:message>
-    var width = $('.error_class').css('width');
-    if (parseInt(width) > 0) {
+    //показываем сообщения только если нет сообщений от <rich:message>   
+    var flag = false;
+    $('.error_class').each(function() {
+        if (flag === false) {
+            var tmp = $(this).css('width');
+            if (parseInt(tmp) > 0) {
+                flag = true;
+            }
+        }
+    });
+    //если есть отображаемые элементы с текстом ошибок то выходим
+    if (flag === true) {
         return;
     }
+
+
 
     $('#growl').css('top', parseInt($('#topbar').height() + 15) + 'px');
 

@@ -80,8 +80,9 @@
                                             <h:panelGrid rendered="#{qs.discr eq 'B'}" columns="2">
                                                 <a4j:repeat value="#{addAnkets.getAnswerListWithSubQuest(qs.id,sq.id)}" var="a">
                                                     <h:outputText value="#{a.name}"/>
-                                                    <h:inputText value="#{addAnkets.getQuestResult(qs,sq).value}" required="true" 
+                                                    <h:inputText id="sor" value="#{addAnkets.getQuestResult(qs,sq).value}" required="false" 
                                                                  requiredMessage="#{msg.err_novalue}"/>
+<!--                                                    <rich:message styleClass="error_class" for="sor" ajaxRendered="true"/>-->
                                                 </a4j:repeat>
                                             </h:panelGrid>
 
