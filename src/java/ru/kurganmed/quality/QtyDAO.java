@@ -41,7 +41,7 @@ public class QtyDAO {
     @Transactional(readOnly = true)
     public List<Quest> getQuestByAnketsId(final int anketId) {
         return currentSession().createQuery("select distinct q from Quest as q left join fetch q.answerSet as ans inner join fetch q.anketId "
-                + "left join fetch q.subqSet where q.anketId.id=:id and q.questNum in (1) order by q.questNum, ans.answNum").setParameter("id", anketId).list();
+                + "left join fetch q.subqSet where q.anketId.id=:id order by q.questNum, ans.answNum").setParameter("id", anketId).list();
     }
 
     /*
