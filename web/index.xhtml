@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:rich="http://richfaces.org/rich">
     <head><title>IGNORED</title></head>
     <body>       
         <ui:composition template="mainLayout.xhtml">
@@ -21,15 +22,34 @@
                     <div id="anlets_list_div">
 
                         <h:panelGroup rendered="#{evnt.currentEventsID gt 0}">                          
-                                                   
-                                                   
-                            <br/>                       
-                            <h:link value="#{msg.ev_addAnkets}" outcome="addAnkets" id="addAnketsButton" styleClass="blue_button"/>
-                            
+
+                            <h:panelGrid columns="2">
+                                <h:link value="#{msg.ev_addAnkets}" outcome="addAnkets" id="addAnket" styleClass="blue_button"/>
+                                <h:panelGroup id="summary">
+                                    <div id="summary_table">
+                                        <h:panelGrid columns="2" rowClasses="even_row, odd_row">
+                                            <h:outputText value="#{msg.sm_lpu}"/>
+                                            <h:outputText value="#{evnt.currentEvent.lpuId.name}"/>
+                                            <h:outputText value="#{msg.sm_type}"/>
+                                            <h:outputText value="#{evnt.currentEvent.anketId.shname}"/>
+                                            <h:outputText value="#{msg.sm_date}"/>
+                                            <h:outputText value="#{evnt.currentEvent.dateB} 
+                                                          - #{(empty evnt.currentEvent.dateE)?msg.ev_dateEnull:evnt.currentEvent.dateE}"/>
+                                            <h:outputText value="#{msg.sm_plan}"/>
+                                            <h:outputText value="#{evnt.currentEvent.plan}"/>
+                                            <h:outputText value="#{msg.sm_fact}"/>
+                                            <h:outputText value="#{evnt.fact}"/>
+                                            <h:outputText value="#{msg.sm_percent}"/>
+                                            <h:outputText value="#{evnt.percent}%"/>
+                                        </h:panelGrid>
+                                    </div>
+                                </h:panelGroup>
+                            </h:panelGrid>
+
                         </h:panelGroup>
 
 
-                    </div>
+                    </div>                    
                 </h:panelGroup>
 
             </ui:define>

@@ -15,12 +15,20 @@ and open the template in the editor.
 
 #heading {position: relative; width: 100%; margin-bottom: 20px;}
 
+#hFooter {}
+#footer {}
+
 #content { position: relative; 
            padding: 10px; background-color: white; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.5);}    
 
 #eventsSel p {margin-bottom: 5px;}
 
-#anlets_list_div {margin-top: 40px;}
+#anlets_list_div {margin: 25px 0px 20px 0px;}
+
+#summary_table {margin-left: 40px; font-size: 80%}
+#summary_table td {padding: 0px 10px;}
+.even_row {background-color: #ccc;}
+.odd_row {background-color: #aeaeae;}
 
 .lower_text {font-size: 70%;}
 
@@ -48,6 +56,8 @@ input[type="text"] {font-size: 120%; margin-left: 5px;}
 
 .error_class {font-size: 100%;}
 
+#small_summary td {padding-right: 20px;}
+#small_summary {position: relative; margin: auto;}
 
 
 

@@ -24,10 +24,13 @@ public class EventsCtrl implements Serializable {
     @Autowired
     private QtyDAO qtyDAO;
 
-    private List<Events> events;        //список событий
+    private List<Events> events;          //список событий
 
     private Integer currentEventsID = 0;  //ID текущего, выбранного пользователем событие
-    private Events currentEvent;        //выбранное пользователем событие
+    private Events currentEvent;         //выбранное пользователем событие
+
+    private Integer fact;               //фактическое число анкет по текущему событию
+    private Double percent;             //процент от плана 
 
     @PostConstruct
     public void init() {
@@ -50,14 +53,35 @@ public class EventsCtrl implements Serializable {
     }
 
     public void setCurrentEventsID(Integer currentEventsID) {
-        this.currentEventsID = currentEventsID;       
-        
+        this.currentEventsID = currentEventsID;
+
         for (int i = 0; i < events.size(); i++) {
             if (events.get(i).getId() == this.currentEventsID) {
                 this.currentEvent = events.get(i);
                 break;
             }
         }
+    }
+
+    public Integer getFact() {
+        fact = qtyDAO.getAnketsResultCount(currentEvent).intValue();
+        return fact;
+    }
+
+    public void setFact(Integer fact) {
+        this.fact = fact;
+    }
+
+    public Double getPercent() {
+        if (currentEvent.getPlan().intValue() > 0) {
+            return fact * 100 / currentEvent.getPlan().doubleValue();
+        } else {
+            return 0D;
+        }
+    }
+
+    public void setPercent(Double percent) {
+        this.percent = percent;
     }
 
     public Events getCurrentEvent() {

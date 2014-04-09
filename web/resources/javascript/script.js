@@ -4,10 +4,20 @@
  * and open the template in the editor.
  */
 
+//начальная инициализация
+$(function() {
+
+    //скроолинг к началу страницы
+    $('.backtotop').click(function() {
+       $('html, body').animate({scrollTop: 0}, 'slow');       
+    });
+
+});
+
+
 //глобальный массив номеров вопросов для проверки средствами JS
 var global_quests = new Array();
 var global_quests_length = 0;
-
 
 
 function init_comp(classId) {

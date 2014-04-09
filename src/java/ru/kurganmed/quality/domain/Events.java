@@ -48,6 +48,8 @@ public class Events implements Serializable {
     @JoinColumn(name = "anket_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Ankets anketId;
+    @Column(name = "plan")
+    private Integer plan;
 
     public Events() {
     }
@@ -59,6 +61,15 @@ public class Events implements Serializable {
     public Events(Integer id, boolean opened) {
         this.id = id;
         this.opened = opened;
+    }
+
+    
+    public Integer getPlan() {
+        return plan;
+    }
+
+    public void setPlan(Integer plan) {
+        this.plan = plan;
     }
 
     public Integer getId() {

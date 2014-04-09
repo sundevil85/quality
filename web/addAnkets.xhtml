@@ -11,9 +11,19 @@
     <body>       
         <ui:composition template="mainLayout.xhtml">
 
-            <ui:define name="content">                  
+            <ui:define name="content">                   
 
                 <h:panelGroup id="questl">
+
+                    <div id="small_summary">
+                        <h:panelGrid columns="3">
+                            <h:outputText value="#{evnt.currentEvent.lpuId.name}"/>
+                            <h:outputText value="#{evnt.currentEvent.dateB} 
+                                          - #{(empty evnt.currentEvent.dateE)?msg.ev_dateEnull:evnt.currentEvent.dateE}"/>
+                            <h:outputText value="#{msg.sm_fact}: #{evnt.fact}"/>
+                        </h:panelGrid>
+                    </div>
+
                     <div id="quest_list">
                         <a4j:repeat value="#{addAnkets.quests}" var="qs"  >
 
@@ -82,7 +92,7 @@
                                                     <h:outputText value="#{a.name}"/>
                                                     <h:inputText id="sor" value="#{addAnkets.getQuestResult(qs,sq).value}" required="false" 
                                                                  requiredMessage="#{msg.err_novalue}"/>
-<!--                                                    <rich:message styleClass="error_class" for="sor" ajaxRendered="true"/>-->
+                                                    <!--                                                    <rich:message styleClass="error_class" for="sor" ajaxRendered="true"/>-->
                                                 </a4j:repeat>
                                             </h:panelGrid>
 
@@ -100,16 +110,17 @@
 
 
                 <div id="addAnkets_button">
-                    <h:panelGrid columns="3">
+                    <h:panelGrid columns="4">
                         <a4j:commandLink value="#{msg.ad_save}" styleClass="blue_button" action="index" 
                                          actionListener="#{addAnkets.saveAnketsResult()}" onclick="return isSetValue();"/>
                         <a4j:commandLink value="#{msg.ad_save_and_add}" styleClass="blue_button" 
                                          actionListener="#{addAnkets.clearAndSaveAnketsResult()}" render="questl" 
-                                         onclick="return isSetValue();" oncomplete="addNotice('#{msg.save_sucess}',2000);"/>                                          
-                        <a4j:commandLink value="#{msg.ad_cancel}" styleClass="blue_button" action="index"/>  
+                                         onclick="return isSetValue();" oncomplete="addNotice('#{msg.save_sucess}',2000);"/> 
+                        <a href="#" class="backtotop blue_button">#{msg.ad_backtotop}</a>
+<!--                        <a4j:commandLink value="#{msg.ad_cancel}" styleClass="blue_button" action="index" immediate="true"/>-->
+                        <h:link value="#{msg.ad_cancel}" styleClass="blue_button" outcome="index"/>
                     </h:panelGrid>
                 </div>
-
 
             </ui:define>
 

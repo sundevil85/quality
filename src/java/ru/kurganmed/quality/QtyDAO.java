@@ -23,9 +23,17 @@ import ru.kurganmed.quality.domain.Quest;
 @Repository("qtyDAO")
 @Transactional
 public class QtyDAO {
-    
+
     @Autowired
     private SessionFactory sessionFactory;
+
+    /*
+     возвращает количество заполненных анкет по указанному событию
+     */
+    public Number getAnketsResultCount(final Events ev) {
+        return (Number) currentSession().createQuery("select count(*) from AnketsResult a where a.events=:ev").
+                setParameter("ev", ev).uniqueResult();
+    }
 
     /*
      возвращает все события
@@ -72,16 +80,16 @@ public class QtyDAO {
      метод синхронизированный для того чтобы две анкеты не смогли получить один и тот же номер из двух разных потоков
      */
     public synchronized void saveAnketsResult(AnketsResult ar) {
-        ar.setAnketNum(getNextAnketsReultsNum(ar.getEvents()));    
+        ar.setAnketNum(getNextAnketsReultsNum(ar.getEvents()));
         ar.setIpaddr(Util.getIPAddr());
         currentSession().saveOrUpdate(ar);
     }
-    
+
     private Session currentSession() {
         return sessionFactory.getCurrentSession();
     }
-    
+
     public QtyDAO() {
     }
-    
+
 }
