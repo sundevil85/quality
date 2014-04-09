@@ -19,8 +19,8 @@ import ru.kurganmed.quality.domain.Events;
  */
 @Named(value = "evnt")
 @Scope("session")
-public class EventsCtrl implements Serializable {
-
+public class EventsCtrl implements Serializable {      
+    
     @Autowired
     private QtyDAO qtyDAO;
 
@@ -34,7 +34,7 @@ public class EventsCtrl implements Serializable {
 
     @PostConstruct
     public void init() {
-        events = qtyDAO.getEvents(); //получение списка событий
+        events = qtyDAO.getEvents(); //получение списка событий          
     }
 
     public List<Events> getEvents() {

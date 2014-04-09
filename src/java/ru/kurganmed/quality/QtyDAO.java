@@ -5,6 +5,7 @@
  */
 package ru.kurganmed.quality;
 
+import ru.kurganmed.quality.utils.Util;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

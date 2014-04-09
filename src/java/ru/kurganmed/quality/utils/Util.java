@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ru.kurganmed.quality;
+package ru.kurganmed.quality.utils;
 
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
