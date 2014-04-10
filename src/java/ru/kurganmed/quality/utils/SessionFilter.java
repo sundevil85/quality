@@ -51,13 +51,14 @@ public class SessionFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
         HttpServletRequest httpRequest = (HttpServletRequest) request;
-        HttpServletResponse httpResponse = (HttpServletResponse) response;
-
         HttpSession session = httpRequest.getSession(false);
 
         //logger.debug("Test request "+httpRequest.getRequestURL()+" "+requestInHomePage(httpRequest.getRequestURL().toString()));
        
+        //если сессии нет и запрос направлен не на главную страницу, то
+        //перенаправляем на главную
         if ((session == null) && (!requestInHomePage(httpRequest.getRequestURL().toString()))) {
+            HttpServletResponse httpResponse = (HttpServletResponse) response;
             httpResponse.sendRedirect(HOME_PAGE);
         }
 
