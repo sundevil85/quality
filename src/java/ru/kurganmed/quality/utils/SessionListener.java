@@ -26,7 +26,7 @@ public class SessionListener implements HttpSessionListener {
     public void sessionCreated(HttpSessionEvent se) {
 //       HttpSession session = se.getSession();
 //       session.setAttribute(SESS_FLAG,true); 
-        logger.debug("Session created! in "+System.currentTimeMillis());
+        //logger.debug("Session created! in "+System.currentTimeMillis());
     }
 
     @Override
